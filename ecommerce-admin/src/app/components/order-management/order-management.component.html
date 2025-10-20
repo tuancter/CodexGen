@@ -1,0 +1,44 @@
+<section class="card">
+  <header>
+    <h2>Quản lý đơn hàng</h2>
+    <p>Giám sát trạng thái xử lý và thanh toán của đơn hàng trên các kênh bán.</p>
+  </header>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Mã đơn</th>
+        <th>Khách hàng</th>
+        <th>Kênh bán</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái đơn</th>
+        <th>Thanh toán</th>
+        <th>Ngày tạo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.code }}</td>
+        <td>{{ order.customer }}</td>
+        <td>
+          <span class="badge">{{ order.channel | titlecase }}</span>
+        </td>
+        <td>{{ order.total | number: '1.0-0' }} ₫</td>
+        <td>
+          <span class="badge" [ngClass]="{
+              'status-active': order.status === 'completed',
+              'status-inactive': order.status === 'cancelled'
+            }"
+            >{{ statusLabel(order.status) }}</span
+          >
+        </td>
+        <td>
+          <span class="badge" [ngClass]="order.paymentStatus === 'paid' ? 'status-active' : 'status-inactive'">
+            {{ paymentLabel(order.paymentStatus) }}
+          </span>
+        </td>
+        <td>{{ order.createdAt }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
