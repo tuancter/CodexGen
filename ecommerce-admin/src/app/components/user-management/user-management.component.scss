@@ -1,0 +1,15 @@
+header p {
+  margin: 0;
+  color: #475569;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.user .muted {
+  color: #94a3b8;
+  font-size: 0.75rem;
+}

@@ -1,0 +1,154 @@
+@use 'sass:color';
+
+:root {
+  --primary-color: #0f766e;
+  --primary-dark: color.scale(#0f766e, $lightness: -20%);
+  --surface-color: #f8fafc;
+  --text-color: #0f172a;
+  --border-color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary-color);
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+.app-shell__sidebar {
+  background: #0b1727;
+  color: #e2e8f0;
+  padding: 1.5rem;
+}
+
+.app-shell__sidebar h1 {
+  margin: 0 0 2rem;
+  font-size: 1.5rem;
+}
+
+.app-shell__nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.app-shell__nav a {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.app-shell__nav a.active,
+.app-shell__nav a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.app-shell__content {
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(15, 118, 110, 0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.table th {
+  background-color: #f1f5f9;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  font: inherit;
+}
+
+button {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background-color: #e2e8f0;
+  color: #0f172a;
+  font-size: 0.75rem;
+}
+
+.status-active {
+  background-color: rgba(22, 163, 74, 0.15);
+  color: #166534;
+}
+
+.status-inactive {
+  background-color: rgba(220, 38, 38, 0.15);
+  color: #991b1b;
+}

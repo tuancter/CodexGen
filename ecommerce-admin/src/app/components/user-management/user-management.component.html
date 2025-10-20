@@ -1,0 +1,38 @@
+<section class="card">
+  <header>
+    <h2>Quản lý người dùng</h2>
+    <p>Theo dõi, phân quyền và quản lý đội ngũ vận hành cửa hàng.</p>
+  </header>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Họ và tên</th>
+        <th>Email</th>
+        <th>Vai trò</th>
+        <th>Trạng thái</th>
+        <th>Hoạt động gần đây</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>
+          <div class="user">
+            <strong>{{ user.name }}</strong>
+            <span class="muted">{{ user.id }}</span>
+          </div>
+        </td>
+        <td>{{ user.email }}</td>
+        <td>
+          <span class="badge">{{ user.role | titlecase }}</span>
+        </td>
+        <td>
+          <span class="badge" [ngClass]="{ 'status-active': user.status === 'active', 'status-inactive': user.status === 'suspended' }">
+            {{ user.status === 'invited' ? 'Đã mời' : user.status === 'active' ? 'Đang hoạt động' : 'Tạm khóa' }}
+          </span>
+        </td>
+        <td>{{ user.lastActive }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

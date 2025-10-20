@@ -1,0 +1,15 @@
+<div class="app-shell">
+  <aside class="app-shell__sidebar">
+    <h1>Ecommerce Admin</h1>
+    <nav>
+      <ul class="app-shell__nav">
+        <li *ngFor="let item of navigation">
+          <a routerLink="{{ item.path }}" routerLinkActive="active">{{ item.label }}</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <main class="app-shell__content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

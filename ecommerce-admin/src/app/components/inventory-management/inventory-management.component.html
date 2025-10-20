@@ -1,0 +1,160 @@
+<section class="inventory-grid">
+  <article class="card inventory-grid__form">
+    <header>
+      <h2>Thêm sản phẩm mới</h2>
+      <p>Điền đầy đủ thông tin theo mẫu chuẩn để đồng bộ với các hệ thống khác.</p>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <label>
+          Tên sản phẩm
+          <input type="text" formControlName="name" placeholder="Ví dụ: Áo thun Oversize" />
+        </label>
+        <label>
+          Slug
+          <input type="text" formControlName="slug" placeholder="auto-gen nếu bỏ trống" />
+          <small class="muted">{{ attributePreview.slug }}</small>
+        </label>
+        <label>
+          SKU
+          <input type="text" formControlName="sku" placeholder="SKU duy nhất" />
+          <small class="muted">{{ attributePreview.sku }}</small>
+        </label>
+        <label>
+          Giá bán (VND)
+          <input type="number" formControlName="price" min="0" />
+        </label>
+        <label>
+          Giá khuyến mại (VND)
+          <input type="number" formControlName="discountPrice" min="0" />
+        </label>
+        <label>
+          Giá vốn (VND)
+          <input type="number" formControlName="cost" min="0" />
+        </label>
+        <label>
+          Số lượng tồn kho
+          <input type="number" formControlName="stockQuantity" min="0" />
+        </label>
+        <label>
+          Ngưỡng tồn tối thiểu
+          <input type="number" formControlName="minStockLevel" min="0" />
+          <small class="muted">Thiết lập cảnh báo tồn kho thấp</small>
+        </label>
+        <label>
+          Danh mục
+          <select formControlName="categoryId">
+            <option value="" disabled>-- chọn danh mục --</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </label>
+        <label>
+          Trạng thái
+          <select formControlName="status">
+            <option [ngValue]="1">Đang bán</option>
+            <option [ngValue]="0">Ngừng bán</option>
+          </select>
+          <small class="muted">{{ attributePreview.status }}</small>
+        </label>
+        <label>
+          Thương hiệu
+          <input type="text" formControlName="brandId" placeholder="ID thương hiệu" />
+        </label>
+        <label>
+          Trọng lượng (kg)
+          <input type="number" step="0.01" formControlName="weight" min="0" />
+        </label>
+        <label>
+          Kích thước
+          <input type="text" formControlName="dimensions" placeholder="Ví dụ: 20x30x10 cm" />
+        </label>
+      </div>
+
+      <label>
+        Mô tả ngắn
+        <textarea rows="2" formControlName="shortDescription" placeholder="Tóm tắt thông tin nổi bật"></textarea>
+      </label>
+      <label>
+        Mô tả chi tiết
+        <textarea rows="4" formControlName="description" placeholder="Mô tả đầy đủ cho sản phẩm"></textarea>
+      </label>
+
+      <div class="form-grid">
+        <label>
+          Meta title
+          <input type="text" formControlName="metaTitle" />
+        </label>
+        <label>
+          Meta description
+          <input type="text" formControlName="metaDescription" />
+        </label>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          Hình ảnh (JSON)
+          <input type="text" formControlName="images" placeholder='["https://..."]' />
+        </label>
+        <label>
+          Thuộc tính (JSON)
+          <input type="text" formControlName="attributes" placeholder='{"color":"Đen"}' />
+        </label>
+        <label>
+          Tag IDs (JSON)
+          <input type="text" formControlName="tagIds" placeholder='["tag-a","tag-b"]' />
+        </label>
+      </div>
+
+      <div class="toggles">
+        <label>
+          <input type="checkbox" formControlName="isFeatured" />
+          <span>Sản phẩm nổi bật</span>
+        </label>
+        <label>
+          <input type="checkbox" formControlName="isDigital" />
+          <span>Sản phẩm số (không cần vận chuyển)</span>
+        </label>
+      </div>
+
+      <button type="submit">Lưu sản phẩm</button>
+    </form>
+  </article>
+
+  <section class="card inventory-grid__list">
+    <header>
+      <h2>Danh sách sản phẩm</h2>
+      <p>Các sản phẩm sẽ hiển thị theo thứ tự mới nhất.</p>
+    </header>
+
+    <table class="table" *ngIf="(products$ | async) as products">
+      <thead>
+        <tr>
+          <th>Tên sản phẩm</th>
+          <th>SKU</th>
+          <th>Tồn kho</th>
+          <th>Giá bán</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <div class="product-name">
+              <strong>{{ product.name }}</strong>
+              <small class="muted">/{{ product.slug }}</small>
+            </div>
+          </td>
+          <td>{{ product.sku }}</td>
+          <td>{{ product.stockQuantity }} (min {{ product.minStockLevel }})</td>
+          <td>{{ product.price | number: '1.0-0' }} ₫</td>
+          <td>
+            <span class="badge" [ngClass]="product.status === 1 ? 'status-active' : 'status-inactive'">
+              {{ product.status === 1 ? 'Đang bán' : 'Ngừng bán' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>

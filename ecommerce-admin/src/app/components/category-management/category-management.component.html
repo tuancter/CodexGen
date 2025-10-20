@@ -1,0 +1,27 @@
+<section class="card">
+  <header>
+    <h2>Quản lý danh mục</h2>
+    <p>Quản lý cấu trúc danh mục sản phẩm và số lượng mặt hàng liên quan.</p>
+  </header>
+
+  <div class="category-tree">
+    <div class="category-node" *ngFor="let category of categories">
+      <div class="category-node__header">
+        <div>
+          <strong>{{ category.name }}</strong>
+          <span class="muted">/{{ category.slug }}</span>
+        </div>
+        <span class="badge">{{ category.productCount }} sản phẩm</span>
+      </div>
+      <ul *ngIf="category.children?.length" class="category-node__children">
+        <li *ngFor="let child of category.children">
+          <div class="category-node__child">
+            <span>{{ child.name }}</span>
+            <span class="muted">/{{ child.slug }}</span>
+            <span class="badge">{{ child.productCount }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

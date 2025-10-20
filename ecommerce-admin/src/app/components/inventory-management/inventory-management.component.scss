@@ -1,0 +1,36 @@
+.inventory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.inventory-grid__form form {
+  margin-top: 1.5rem;
+}
+
+.toggles {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.toggles label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name .muted {
+  color: #94a3b8;
+}
+
+@media (max-width: 1200px) {
+  .inventory-grid {
+    grid-template-columns: 1fr;
+  }
+}
